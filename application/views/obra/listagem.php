@@ -143,7 +143,7 @@
                         </div> -->
                         
                         <div class="tableFixHead">
-                            <table id="myTableFrota" class="table table-hover table-bordered">
+                            <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
                                         <th class="d-none"></th>
@@ -154,20 +154,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php print_r($obras) ?>
-                                    <?php foreach ($obras as $i => $obra) : ?>
+                                    <?php foreach ($obras as $obra) { ?>
                                         <tr>
-                                            <td class="d-none"><?= $i ?></td>
+                                            <td class="d-none"><?= $obra['obra_id'] ?></td>
                                             <td class="text-center"><?= $obra['obra_nome'] ?></td>
-                                            <td class="text-center"><?= $obra->obra_cidade ?></td>
-                                            <td class="text-center"><?= $obra->obra_estado ?></td>
+                                            <td class="text-center"><?= $obra['obra_cidade'] ?></td>
+                                            <td class="text-center"><?= $obra['obra_estado'] ?></td>
            
                                             <td class="text-center">
-                                                <a style="font-size: 12px" href="<?= base_url('ativos/edit/') . $obra->obra_id ?>" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
-                                                <a onclick="destroyObra(<?= $obra->obra_id ?>)" style="font-size: 12px" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                                <a style="font-size: 12px" href="<?= base_url('obra/cadastro/') . $obra['obra_id'] ?>" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                                                <a onclick="destroyObra(<?= $obra['obra_id'] ?>)" style="font-size: 12px" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
-                                    <?php endforeach ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>

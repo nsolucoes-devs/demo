@@ -98,7 +98,7 @@
     <div class="row main-row">
         <div class="col-md-12 main-col-12">
 
-            <form action="<?php echo base_url('obra/insertObra') ?>" method="post" enctype='multipart/form-data'>
+            <form action="<?php echo base_url('obra/core') ?>" method="post" enctype='multipart/form-data'>
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: #eef5f9">
                     <li class="nav-item">
@@ -113,25 +113,25 @@
 
                 </ul>
 
-                <div id="divDados" class="change-tab-div white-tab">
+                <
+
+                <div id="divDados" class="change-tab-div white-tab py-4">
                     <div class="col-md-12" style="background-color:white; border-radius: 5px">
                         <div class="row">
-
                             <div class="col-md-6 form-group">
                                 <label for="nome">Nome</label><br>
-                                <input id="nome" name="nome" type="text" class="form-control" placeholder="Nome" />
+                                <input id="nome" name="obra_nome" type="text" class="form-control" placeholder="Nome" value="<?php echo ($edita != NULL ? $edita->obra_nome : set_value('obra_nome')) ?>" />
                             </div>
 
                             <div class="col-md-3 form-group">
                                 <label for="cidade">Cidade</label><br>
-                                <input id="cidade" name="cidade" type="text" class="form-control" placeholder="Cidade" />
+                                <input id="cidade" name="obra_cidade" type="text" class="form-control" placeholder="Cidade" value="<?php echo ($edita != NULL ? $edita->obra_cidade : set_value('obra_cidade')) ?>" />
                             </div>
 
                             <div class="col-md-3 form-group">
                                 <label for="estado">Estado</label><br>
-                                <input id="estado" name="estado" type="text" class="form-control" placeholder="Estado" />
+                                <input id="estado" name="obra_estado" type="text" class="form-control" placeholder="Estado" value="<?php echo ($edita != NULL ? $edita->obra_estado : set_value('obra_estado')) ?>" />
                             </div>
-
                         </div>
 
                         <br>
@@ -139,12 +139,12 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="cliente">Cliente da Obra</label><br>
-                                <input id="cliente" name="cliente" type="text" class="form-control" placeholder="Cliente" />
+                                <input id="cliente" name="obra_cliente" type="text" class="form-control" placeholder="Cliente" value="<?php echo ($edita != NULL ? $edita->obra_cliente : set_value('obra_cliente')) ?>" />
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label for="tipo">Tipo de Obra</label><br>
-                                <input id="tipo" name="tipo" type="text" class="form-control" placeholder="Tipo" />
+                                <input id="tipo" name="obra_tipo" type="text" class="form-control" placeholder="Tipo" value="<?php echo ($edita != NULL ? $edita->obra_tipo : set_value('obra_tipo')) ?>" />
                             </div>
 
                         </div>
@@ -155,12 +155,12 @@
 
                             <div class="col-md-6 form-group">
                                 <label for="responsavel">Responsável</label><br>
-                                <input id="responsavel" name="responsavel" type="text" class="form-control" placeholder="Responsável" />
+                                <input id="responsavel" name="obra_responsavel" type="text" class="form-control" placeholder="Responsável" value="<?php echo ($edita != NULL ? $edita->obra_responsavel : set_value('obra_responsavel')) ?>" />
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label>Engenheiro Obra</label><br>
-                                <input id="engenheiro" name="engenheiro" type="text" class="form-control" placeholder="Engenheiro" />
+                                <input id="engenheiro" name="obra_engenheiro" type="text" class="form-control" placeholder="Engenheiro" value="<?php echo ($edita != NULL ? $edita->obra_engenheiro : set_value('obra_engenheiro')) ?>" />
                             </div>
 
                         </div>
@@ -171,12 +171,12 @@
 
                             <div class="col-md-6 form-group">
                                 <label for="gestor">Gestor do Contrato</label><br>
-                                <input id="gestor" name="gestor" type="text" class="form-control" placeholder="Gestor" />
+                                <input id="gestor" name="obra_gestor" type="text" class="form-control" placeholder="Gestor" value="<?php echo ($edita != NULL ? $edita->obra_gestor : set_value('obra_gestor')) ?>" />
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label for="gestor_empresa">Gestor do Contrato Empresa</label><br>
-                                <input id="gestor_empresa" name="gestor_empresa" type="text" class="form-control" placeholder="Gestor da Empresa" />
+                                <input id="gestor_empresa" name="obra_gestor_empresa" type="text" class="form-control" placeholder="Gestor da Empresa" value="<?php echo ($edita != NULL ? $edita->obra_gestor_empresa : set_value('obra_gestor_empresa')) ?>" />
                             </div>
 
                         </div>
@@ -187,52 +187,34 @@
 
                             <div class="col-md-3 form-group">
                                 <label for="data_inicial">Data Inicial</label><br>
-                                <input id="data_inicial" name="data_inicial" type="date" class="form-control" maxlength="30" placeholder="" />
+                                <input id="data_inicial" name="obra_data_inicial" type="date" class="form-control" maxlength="30" placeholder="" value="<?php echo ($edita != NULL ? $edita->obra_data_inicial : set_value('obra_data_inicial')) ?>" />
                             </div>
 
                             <div class="col-md-3 form-group">
                                 <label for="data_final">Data Final</label><br>
-                                <input id="data_final" name="data_final" type="date" class="form-control" placeholder="" />
+                                <input id="data_final" name="obra_data_final" type="date" class="form-control" placeholder="" value="<?php echo ($edita != NULL ? $edita->obra_data_final : set_value('obra_data_final')) ?>" />
                             </div>
 
                             <div class="col-md-3 form-group">
                                 <label for="valor">Valor da Obra</label><br>
-                                <input id="valor" name="valor" type="text" class="form-control money" placeholder="" />
+                                <input id="valor" name="obra_valor" type="text" class="form-control money" placeholder="" value="<?php echo ($edita != NULL ? $edita->obra_valor : set_value('obra_valor')) ?>" />
                             </div>
 
                             <div class="col-md-3 form-group">
                                 <label for="numero_contrato">Número do Contrato</label><br>
-                                <input id="numero_contrato" name="numero_contrato" type="text" class="form-control" placeholder="" />
+                                <input id="numero_contrato" name="obra_numero_contrato" type="text" class="form-control" placeholder="" value="<?php echo ($edita != NULL ? $edita->obra_numero_contrato : set_value('obra_numero_contrato')) ?>" />
                             </div>
+
+                            <?php if ($edita) { ?>
+                                <input type="hidden" name="obra_id" value="<?= $dados->obra_id ?>">
+                            <?php } ?>
 
                         </div>
-
-                        <br>
-
-                        <div class="row">
-
-                            <div class="col-md-4 form-group">
-                                <label for="relatorio">Relatório de Custo de Obra</label><br>
-                                <input id="relatorio" name="relatorio" type="text" class="form-control" placeholder="" />
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label for="calcular_valor">Calculando Valor Inicial</label><br>
-                                <input id="calcular_valor" name="calcular_valor" type="text" class="form-control" placeholder="" />
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label for="valor_final">Valor Final da Obra</label><br>
-                                <input id="valor_final" name="valor_final" type="text" class="form-control" placeholder="" />
-                            </div>
-
-                        </div>
-
                     </div>
                 </div>
 
 
-                <div id="divDocs" style="display:none;" class="change-tab-div white-tab">
+                <div id="divDocs" style="display:none;" class="change-tab-div white-tab py-4">
                     <div class="col-md-12" style="background-color:white; border-radius: 5px">
                         <br><br>
 
@@ -365,7 +347,7 @@
                     </div>
                 </div>
 
-                <div id="divCusto" style="display:none;" class="change-tab-div white-tab">
+                <div id="divCusto" style="display:none;" class="change-tab-div white-tab py-4">
                     <div class="col-md-12" style="background-color:white; border-radius: 5px">
                         <br>
 
@@ -430,12 +412,9 @@
 
 
                 <div class="row" style="">
-                    <div class="col-md-12 text-center">
-                        <br><br>
+                    <div class="col-md-12 text-center my-5 ">
                         <a href="<?php echo base_url('obras') ?>" class="btn btn-danger">Cancelar</a>
-                        &nbsp
-                        <button type="submit" id="btn-save" class="btn btn-primary" style="color: white">Salvar</button>
-                        <br><br>
+                        <button type="submit" id="btn-save" class="btn btn-primary ml-3" style="color: white">Salvar</button>
                     </div>
                 </div>
 
