@@ -16,10 +16,8 @@ class Obramodel extends CI_Model{
         }
     }
     
-    public function getById($id = NULL) {
-        if ($id) {
-            $this->db->where('obra_id',  $id);
-            return $this->db->get('obra')->row();
-        }
+    public function getById($id) {
+        $this->db->where('obra_id',  $id);
+        return $this->db->get('obra')->row_array();
     }
 }

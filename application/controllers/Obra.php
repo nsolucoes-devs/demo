@@ -14,6 +14,8 @@ class Obra extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        error_reporting(-1);
+		ini_set('display_errors', 1);
         $this->load->database();
         $this->load->model('documentosmodel');
         $this->load->model('ativosmodel');
@@ -27,12 +29,10 @@ class Obra extends MY_Controller
 
     public function cadastro()
     {        
-        if ($this->uri->segment('2')) {
-            $id = $this->uri->segment('2');
-            $this->header('5', 'EDIÇÃO DE OBRA', 'obra', 'Obra', 'Edição de obra');
+        if ($this->uri->segment('3')) {
+            $id = $this->uri->segment('3');
         } else {
-            $this->header('5', 'CADASTRO DE OBRA', 'obra', 'Obra', 'Cadastro de obra');
-            $id = false;
+            $id = false; 
         }
 
         $data = array(
@@ -48,20 +48,24 @@ class Obra extends MY_Controller
             'tiposmunck'        => $this->frotamodel->getAllTiposMunckAtivos(),
             'tipos'             => $this->frotamodel->getAllTiposAtivos(),
             'documentos_tipos'  => $this->documentosmodel->getAllTiposAtivos(),
-            //'posicao'           => $this->frotamodel->posicao(),
+            'posicao'           => $this->frotamodel->posicao(),
             'edita'             => $id ? $this->obramodel->getById($id) : null,
             'fixed'             => null,
         ); 
 
-        if (!$data['edita']) {
-            redirect(base_url('obras', 'refresh'));
+ 
+        if ($id) {
+            if (!$data['edita']) {
+                redirect(base_url('obras', 'refresh'));
+            } 
+
+            $data['fixed'] = $this->documentosmodel->getOldByFrota(6, $data['edita']['obra_codigo']);
+            $data['totalGeral'] = 0.000;
+
+            $this->header('5', 'EDIÇÃO DE OBRA', 'obra', 'Obra', 'Edição de obra');
+        } else {
+            $this->header('5', 'CADASTRO DE OBRA', 'obra', 'Obra', 'Cadastro de obra');
         }
-
-        echo '213';
-
-
-        $data['fixed'] = $this->documentosmodel->getOldByFrota(6, @$data['edita']->frota_codigo);
-        $data['totalGeral'] = 0.000;
 
         $this->load->view('obra/cadastro', $data);
         $this->footer();
@@ -93,21 +97,21 @@ class Obra extends MY_Controller
     } 
     
     
-    public function core() {
-        
-        $this->form_validation->set_rules('nome', 'Nome', 'trim|required|min_length[5]');
-        $this->form_validation->set_rules('email', 'E-mail', 'trim|required|valid_email');
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]');
-        $this->form_validation->set_rules('telefone', 'Telefone', 'trim|required');
+    public function core() {  
 
-        if (!$this->input->post('id_usuario')) {
-            $this->form_validation->set_rules('senha', 'Senha', 'trim|required|min_length[6]|max_length[13]');
-        }
+        // $this->form_validation->set_rules('obra_nome', 'Nome', 'trim|required|min_length[5]');
+        // $this->form_validation->set_rules('obra_cidade', 'Cidade', 'trim|required|min_length[5]');
+        // $this->form_validation->set_rules('obra_valor', 'Estado', 'trim|required');
+        // $this->form_validation->set_rules('obra_cliente', 'Cliente da Obra', 'trim|required');
+        // $this->form_validation->set_rules('obra_tipo', 'Tipo de Obra', 'trim|required');
+        // $this->form_validation->set_rules('obra_numero_contrato', 'Número do Contrato', 'trim|required');
 
-        if ($this->form_validation->run() == TRUE) {     
 
+
+        // if ($this->form_validation->run()) {   
             $dados = array(
                 'obra_nome'             => addslashes($_POST['obra_nome']),
+                'obra_codigo'           => addslashes($_POST['obra_codigo']),
                 'obra_cidade'           => addslashes($_POST['obra_cidade']),
                 'obra_estado'           => addslashes($_POST['obra_estado']),
                 'obra_cliente'          => addslashes($_POST['obra_cliente']),
@@ -120,18 +124,18 @@ class Obra extends MY_Controller
                 'obra_data_final'       => addslashes($_POST['obra_data_final']),
                 'obra_valor'            => addslashes(formatoDecimal($_POST['obra_valor'])),
                 'obra_numero_contrato'  => addslashes($_POST['obra_numero_contrato']),
-                'obra_codigo'           => '',
             );
                 
             if(array_key_exists('id', $_POST)){
-                $dados['obra_id'] = $_POST['id'];
+                $dados['obra_id'] = $_POST['obra_id'];
             }
 
-            $this->obramodel->cruObra($dados);
-            redirect(base_url('obras', 'refresh'));
+            // $this->obramodel->cruObra($dados);
+            // redirect(base_url('obras', 'refresh'));
 
-        } else {
-            $this->cadastro();
-        }
+        // } else {
+        //     $this->cadastro();
+        //     // redirect(base_url('obra/cadastro'));
+        // }
     }
 }
