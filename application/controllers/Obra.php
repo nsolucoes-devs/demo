@@ -51,7 +51,7 @@ class Obra extends MY_Controller
             'posicao'           => $this->frotamodel->posicao(),
             'edita'             => $id ? $this->obramodel->getById($id) : null,
             'fixed'             => null,
-        ); 
+        );  
 
  
         if ($id) {
@@ -99,16 +99,16 @@ class Obra extends MY_Controller
     
     public function core() {  
 
-        // $this->form_validation->set_rules('obra_nome', 'Nome', 'trim|required|min_length[5]');
-        // $this->form_validation->set_rules('obra_cidade', 'Cidade', 'trim|required|min_length[5]');
-        // $this->form_validation->set_rules('obra_valor', 'Estado', 'trim|required');
-        // $this->form_validation->set_rules('obra_cliente', 'Cliente da Obra', 'trim|required');
-        // $this->form_validation->set_rules('obra_tipo', 'Tipo de Obra', 'trim|required');
-        // $this->form_validation->set_rules('obra_numero_contrato', 'Número do Contrato', 'trim|required');
+        $this->form_validation->set_rules('obra_nome', 'Nome', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('obra_cidade', 'Cidade', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('obra_valor', 'Estado', 'trim|required');
+        $this->form_validation->set_rules('obra_cliente', 'Cliente da Obra', 'trim|required');
+        $this->form_validation->set_rules('obra_tipo', 'Tipo de Obra', 'trim|required');
+        $this->form_validation->set_rules('obra_numero_contrato', 'Número do Contrato', 'trim|required');
 
 
 
-        // if ($this->form_validation->run()) {   
+        if ($this->form_validation->run()) {   
             $dados = array(
                 'obra_nome'             => addslashes($_POST['obra_nome']),
                 'obra_codigo'           => addslashes($_POST['obra_codigo']),
@@ -130,12 +130,12 @@ class Obra extends MY_Controller
                 $dados['obra_id'] = $_POST['obra_id'];
             }
 
-            // $this->obramodel->cruObra($dados);
-            // redirect(base_url('obras', 'refresh'));
+            $this->obramodel->cruObra($dados);
+            redirect(base_url('obras', 'refresh'));
 
-        // } else {
-        //     $this->cadastro();
-        //     // redirect(base_url('obra/cadastro'));
-        // }
+        } else {
+            $this->cadastro();
+            redirect(base_url('obra/cadastro'));
+        }
     }
 }
